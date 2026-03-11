@@ -6,7 +6,7 @@ This repository contains the React PWA frontend and C# .NET Web API backend for 
 
 Click the button below to automatically provision the PostgreSQL database, deploy the .NET Web API, and build/deploy the React PWA as a static site via Render's Infrastructure-as-Code (IaC) blueprint.
 
-[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=YOUR_PUBLIC_REPO_URL)
+[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/ShmuelCammebys/RenderSample)
 
 *Note: Ensure you update the repository URL in the deploy button link. Upon deployment, check the Render dashboard to configure your environment variables (e.g., Email Service API Keys, JWT Secrets).*
 
