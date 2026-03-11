@@ -27,7 +27,7 @@ services:
         fromService:
           type: web
           name: realestate-api
-          property: url
+          property: host
 
 databases:
   # 3. PostgreSQL Database
