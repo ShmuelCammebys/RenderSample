@@ -52,8 +52,36 @@ export const BrokerApp = () => {
     mutation.mutate({ unitId: parseInt(unitId), prospectEmail: email });
   };
 
+  const connectOAuth = async (provider: string) => {
+    try {
+      const res = await axios.get(`${API_BASE_URL}/api/OAuth/connect/${provider}`);
+      window.open(res.data.url, '_blank');
+    } catch (err) {
+      alert('Failed to initiate OAuth connection.');
+    }
+  };
+
   return (
     <div className="max-w-md mx-auto p-4">
+      <div className="mb-8 p-4 border rounded bg-gray-50">
+        <h3 className="text-lg font-semibold mb-2">Email Connection</h3>
+        <p className="text-sm text-gray-600 mb-4">Connect your email to send verification links directly from your account.</p>
+        <div className="flex gap-2">
+          <button
+            onClick={() => connectOAuth('google')}
+            className="flex-1 bg-white border border-gray-300 py-2 px-4 rounded shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50"
+          >
+            Connect Google
+          </button>
+          <button
+            onClick={() => connectOAuth('microsoft')}
+            className="flex-1 bg-white border border-gray-300 py-2 px-4 rounded shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50"
+          >
+            Connect Microsoft
+          </button>
+        </div>
+      </div>
+
       <h2 className="text-xl font-bold mb-4">Create New Showing</h2>
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>

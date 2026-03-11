@@ -11,6 +11,7 @@ public class AppDbContext : DbContext
     public DbSet<Showing> Showings => Set<Showing>();
     public DbSet<VerificationToken> VerificationTokens => Set<VerificationToken>();
     public DbSet<OutreachEvent> OutreachEvents => Set<OutreachEvent>();
+    public DbSet<BrokerOAuth> BrokerOAuths => Set<BrokerOAuth>();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
