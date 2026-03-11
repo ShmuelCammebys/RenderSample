@@ -75,10 +75,11 @@ public class ShowingsController : ControllerBase
 
             var emailService = _emailFactory.GetEmailService(oauth.Provider);
             var subject = "Action Required: Verify your visit";
+            var encodedToken = System.Net.WebUtility.UrlEncode(rawToken);
             var body = $@"
                 <p>Hello,</p>
                 <p>Please verify your visit to the unit by clicking the link below:</p>
-                <p><a href='{baseUrl}/prospect?showingId={showing.Id}&token={rawToken}'>Verify Visit</a></p>
+                <p><a href='{baseUrl}/prospect?showingId={showing.Id}&token={encodedToken}'>Verify Visit</a></p>
                 <p>Thank you!</p>";
 
             try
