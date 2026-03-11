@@ -8,6 +8,7 @@ public class AppDbContext : DbContext
     public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
 
     public DbSet<Unit> Units => Set<Unit>();
+    public DbSet<User> Users => Set<User>();
     public DbSet<Showing> Showings => Set<Showing>();
     public DbSet<VerificationToken> VerificationTokens => Set<VerificationToken>();
     public DbSet<OutreachEvent> OutreachEvents => Set<OutreachEvent>();

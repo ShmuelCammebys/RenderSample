@@ -3,6 +3,16 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace RealEstateApi.Models;
 
+public class User
+{
+    public Guid Id { get; set; }
+    public string Username { get; set; } = string.Empty;
+    public string PasswordHash { get; set; } = string.Empty;
+    public string Email { get; set; } = string.Empty;
+    public string FullName { get; set; } = string.Empty;
+    public DateTime CreatedAtUtc { get; set; }
+}
+
 public class Unit
 {
     public int Id { get; set; }

@@ -6,6 +6,7 @@ import { BrokerApp } from './components/BrokerApp';
 import { ProspectView } from './components/ProspectView';
 import { AdminPortal } from './components/AdminPortal';
 import { Login } from './components/Login';
+import { SignUp } from './components/SignUp';
 
 const queryClient = new QueryClient();
 
@@ -37,6 +38,7 @@ function App() {
         <div className="min-h-screen bg-background-light dark:bg-background-dark">
           <Routes>
             <Route path="/login" element={isAuthenticated ? <Navigate to="/broker" /> : <Login onLogin={handleLogin} />} />
+            <Route path="/signup" element={isAuthenticated ? <Navigate to="/broker" /> : <SignUp />} />
             <Route path="/broker/*" element={isAuthenticated ? <BrokerApp onLogout={handleLogout} /> : <Navigate to="/login" />} />
             <Route path="/prospect/*" element={<ProspectView />} />
             <Route path="/admin/*" element={isAuthenticated ? <AdminPortal onLogout={handleLogout} /> : <Navigate to="/login" />} />
