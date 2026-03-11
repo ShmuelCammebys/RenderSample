@@ -15,11 +15,13 @@ public class ShowingsController : ControllerBase
 {
     private readonly AppDbContext _db;
     private readonly ITokenService _tokenService;
+    private readonly EmailServiceFactory _emailFactory;
 
-    public ShowingsController(AppDbContext db, ITokenService tokenService)
+    public ShowingsController(AppDbContext db, ITokenService tokenService, EmailServiceFactory emailFactory)
     {
         _db = db;
         _tokenService = tokenService;
+        _emailFactory = emailFactory;
     }
 
     [HttpGet("units")]
@@ -62,8 +64,27 @@ public class ShowingsController : ControllerBase
         _db.VerificationTokens.Add(token);
         await _db.SaveChangesAsync();
 
-        // In a real app, send email here with rawToken
-        // Example: _emailService.SendVerification(req.ProspectEmail, showing.Id, rawToken);
+        var oauth = await _db.BrokerOAuths.FirstOrDefaultAsync(o => o.BrokerId == brokerId);
+        if (oauth != null)
+        {
+            var emailService = _emailFactory.GetEmailService(oauth.Provider);
+            var subject = "Action Required: Verify your visit";
+            var body = $@"
+                <p>Hello,</p>
+                <p>Please verify your visit to the unit by clicking the link below:</p>
+                <p><a href='https://real-estate-app.com/verify?id={showing.Id}&token={rawToken}'>Verify Visit</a></p>
+                <p>Thank you!</p>";
+
+            try
+            {
+                await emailService.SendEmailAsync(req.ProspectEmail, subject, body, oauth.RefreshToken);
+            }
+            catch (Exception ex)
+            {
+                // Log error but don't fail showing creation
+                Console.WriteLine($"Failed to send email: {ex.Message}");
+            }
+        }
 
         return Ok(new { showingId = showing.Id, token = rawToken });
     }

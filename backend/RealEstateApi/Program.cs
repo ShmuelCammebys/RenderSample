@@ -21,6 +21,9 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 
 // DI
 builder.Services.AddScoped<ITokenService, TokenService>();
+builder.Services.AddScoped<GoogleEmailService>();
+builder.Services.AddScoped<MicrosoftEmailService>();
+builder.Services.AddScoped<EmailServiceFactory>();
 builder.Services.AddHostedService<AnomalySweeperJob>();
 
 // Auth

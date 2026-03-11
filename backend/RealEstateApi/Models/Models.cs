@@ -51,3 +51,12 @@ public class OutreachEvent
     [Column(TypeName = "jsonb")]
     public string TelemetryData { get; set; } = "{}"; // IP, UserAgent, etc.
 }
+
+public class BrokerOAuth
+{
+    [Key]
+    public string BrokerId { get; set; } = string.Empty;
+    public string Provider { get; set; } = string.Empty; // "Google" or "Microsoft"
+    public string RefreshToken { get; set; } = string.Empty;
+    public string BrokerEmail { get; set; } = string.Empty;
+}
