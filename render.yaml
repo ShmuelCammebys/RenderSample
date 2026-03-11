@@ -1,14 +1,8 @@
 services:
-  # 1. PostgreSQL Database
-  - type: pgo
-    name: realestate-db
-    databaseName: realestate
-    plan: starter
-
-  # 2. .NET 8 Backend API
+  # 1. .NET 8 Backend API
   - type: web
     name: realestate-api
-    env: docker
+    runtime: docker
     dockerContext: backend/RealEstateApi
     dockerfilePath: Dockerfile
     plan: starter
@@ -22,10 +16,10 @@ services:
         generateValue: true
       # Add Email Provider API Keys here in the Render Dashboard
 
-  # 3. React PWA Frontend
+  # 2. React PWA Frontend
   - type: web
     name: realestate-frontend
-    env: static
+    runtime: static
     buildCommand: cd frontend && npm install && npm run build
     staticPublishPath: frontend/dist
     envVars:
@@ -34,3 +28,9 @@ services:
           type: web
           name: realestate-api
           property: url
+
+databases:
+  # 3. PostgreSQL Database
+  - name: realestate-db
+    databaseName: realestate
+    plan: starter
