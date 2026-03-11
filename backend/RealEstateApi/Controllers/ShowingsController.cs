@@ -67,12 +67,18 @@ public class ShowingsController : ControllerBase
         var oauth = await _db.BrokerOAuths.FirstOrDefaultAsync(o => o.BrokerId == brokerId);
         if (oauth != null)
         {
+            var baseUrl = Request.Headers["Origin"].ToString();
+            if (string.IsNullOrEmpty(baseUrl))
+            {
+                baseUrl = $"{Request.Scheme}://{Request.Host}";
+            }
+
             var emailService = _emailFactory.GetEmailService(oauth.Provider);
             var subject = "Action Required: Verify your visit";
             var body = $@"
                 <p>Hello,</p>
                 <p>Please verify your visit to the unit by clicking the link below:</p>
-                <p><a href='https://real-estate-app.com/verify?id={showing.Id}&token={rawToken}'>Verify Visit</a></p>
+                <p><a href='{baseUrl}/prospect?showingId={showing.Id}&token={rawToken}'>Verify Visit</a></p>
                 <p>Thank you!</p>";
 
             try
