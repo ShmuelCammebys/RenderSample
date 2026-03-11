@@ -1,0 +1,21 @@
+# .NET
+bin/
+obj/
+*.user
+*.userosscache
+*.sln.docuser
+.vs/
+.vscode/
+
+# Node.js
+node_modules/
+dist/
+dist-ssr/
+*.local
+.eslintcache
+
+# Logs
+*.log
+
+# OS
+.DS_Store
