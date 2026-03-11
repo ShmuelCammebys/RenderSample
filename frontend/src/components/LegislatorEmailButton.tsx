@@ -33,9 +33,10 @@ export const LegislatorEmailButton: React.FC<LegislatorEmailButtonProps> = ({
   return (
     <button
       onClick={handleOutreachClick}
-      className="w-full bg-blue-600 text-white font-semibold py-3 px-6 rounded-lg shadow-md hover:bg-blue-700 transition-colors"
+      className="flex w-full cursor-pointer items-center justify-center rounded-lg h-14 px-6 bg-slate-200 dark:bg-slate-800 text-slate-900 dark:text-slate-100 text-base font-bold hover:bg-slate-300 dark:hover:bg-slate-700 transition-all shadow-sm"
     >
-      Email NY Legislators
+      <span className="material-symbols-outlined mr-2">alternate_email</span>
+      <span>Email NY Legislators</span>
     </button>
   );
 };

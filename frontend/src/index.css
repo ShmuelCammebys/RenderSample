@@ -1,3 +1,32 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  :root {
+    --brand-color: #1142d4;
+    --brand-hover: #0d35b5;
+    --background-light: #f6f6f8;
+    --background-dark: #101522;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-[#1142d4] text-white font-bold rounded-lg transition-all shadow-md;
+    background-color: var(--brand-color);
+  }
+  
+  .btn-primary:hover {
+    @apply opacity-90;
+    background-color: var(--brand-hover);
+  }
+
+  .text-brand {
+    color: var(--brand-color);
+  }
+
+  .bg-brand {
+    background-color: var(--brand-color);
+  }
+}
