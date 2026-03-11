@@ -35,11 +35,17 @@ public class OAuthController : ControllerBase
         if (provider.ToLower() == "google")
         {
             var clientId = _config["Google:ClientId"];
+            if (string.IsNullOrEmpty(clientId) || clientId.StartsWith("YOUR_"))
+                return BadRequest("Google OAuth ClientId is not configured in appsettings.Development.json");
+
             url = $"https://accounts.google.com/o/oauth2/v2/auth?client_id={clientId}&redirect_uri={WebUtility.UrlEncode(redirectUri)}&response_type=code&scope=https://www.googleapis.com/auth/gmail.send%20email%20openid&access_type=offline&prompt=consent&state={state}";
         }
         else if (provider.ToLower() == "microsoft")
         {
             var clientId = _config["Microsoft:ClientId"];
+            if (string.IsNullOrEmpty(clientId) || clientId.StartsWith("YOUR_"))
+                return BadRequest("Microsoft OAuth ClientId is not configured in appsettings.Development.json");
+
             url = $"https://login.microsoftonline.com/common/oauth2/v2.0/authorize?client_id={clientId}&redirect_uri={WebUtility.UrlEncode(redirectUri)}&response_type=code&scope=https://graph.microsoft.com/Mail.Send%20https://graph.microsoft.com/User.Read%20offline_access&state={state}";
         }
         else
